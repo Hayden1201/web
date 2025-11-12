@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vivian's Page</title>
+    <!-- Load Tailwind CSS for utility classes -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* General Setup */
+        :root {
+            font-family: "Inter", sans-serif;
+        }
+
+        /* Container helpers: Using user's requested light blue background */
+        .body {
+            background-color: #add8e6; /* lightblue */
+            min-height: 100vh;
+            padding: 2rem;
+            /* Using a box shadow provided by Tailwind for modern look */
+        }
+
+        /* --- THE CLEAN LAYOUT CODE (CSS Grid) --- */
+        .top-row {
+            display: grid;
+            /* Side boxes 200px, picture column takes remaining space */
+            grid-template-columns: minmax(150px, 200px) 1fr minmax(150px, 200px);
+            
+            /* CRITICAL FIX: stretch items to fill the height of the tallest item (the picture) */
+            align-items: stretch; 
+            
+            gap: 1.5rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        /* Side boxes */
+        .side {
+            /* Use flexbox to align content vertically inside the stretched box */
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Center content vertically */
+            
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.7); /* Translucent white for readability */
+            color: #1a237e; /* Dark blue text */
+            font-size: 0.95rem;
+            line-height: 1.4;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 1px solid #1a237e;
+            font-weight: 500;
+        }
+
+        .side.left { text-align: left; }
+        .side.right { text-align: right; }
+
+        /* Picture Container (Center Column) */
+        .picture {
+            display: flex;
+            align-items: center; 
+            justify-content: center; 
+            gap: 1rem; 
+            padding: 1rem;
+            flex-direction: column; /* Stack image and text vertically */
+        }
+        
+        /* Image sizing */
+        .photo {
+            width: 200px; 
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Make it circular */
+        .circle {
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid #1a237e;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* caption next to image */
+        .caption {
+            margin: 0;
+            max-width: 320px;
+            font-size: 1.1rem;
+            color: #1a237e;
+            font-weight: 600;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        /* Responsive: stack on narrow screens */
+        @media (max-width: 800px) {
+            .top-row {
+                grid-template-columns: 1fr; /* Stack into a single column */
+                gap: 1rem;
+            }
+            .side {
+                /* When stacked, let the height be defined by content */
+                height: auto;
+                text-align: center;
+                /* Remove column direction for better single-column stacking */
+                flex-direction: row; 
+                justify-content: center;
+                align-items: center;
+            }
+            .picture {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body class="body">
+
+    <!-- The Equal Height Top Row using CSS Grid -->
+    <div class="top-row">
+        <!-- LEFT BOX (matches picture height) -->
+        <div class="side left">
+            <p>不知道可以說啥，哈哈哈哈哈哈</p>
+        </div>
+
+        <!-- CENTER PICTURE BLOCK (defines the height of the row) -->
+        <div class="picture">
+            <!-- Used placeholder to represent your shiba.jpg -->
+            <img class="photo circle" src="images/shiba.jpg" alt="Shiba Dog">
+            <p class="caption">柴犬祝你生日快樂</p>
+        </div>
+
+        <!-- RIGHT BOX (matches picture height) -->
+        <div class="side right">
+            <p>祝你朋友越來越多，不要再吵架</p>
+        </div>
+    </div>
+    
+    <!-- Main content below the grid, now correctly centered -->
+    <main class="text-center mt-16 px-4">
+        <h1 class="text-6xl font-extrabold text-[#1a237e] mb-4">生日快樂</h1>
+        <p class="text-xl text-gray-700 max-w-3xl mx-auto">
+            祝你早日脫單，找到你的正緣，如你所願的帥哥
+        </p>
+    </main>
+
+</body>
+</html>
